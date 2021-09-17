@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 import './index.css';
 
 class Item extends Component {
+
+    handleChange = (id) => {
+        const {updateChecked} = this.props;
+        return (event) => {
+            updateChecked(id, event.target.checked);
+        }
+    }
     render() {
-        // eslint-disable-next-line no-unused-vars
-        const {name, done} = this.props;
+        const {id, name, done} = this.props;
         return (
             <div>
                 <li>
                     <label>
-                        <input type="checkbox" defaultChecked={done}/>
+                        <input type="checkbox" checked={done} onChange={this.handleChange(id)}/>
                         <span>{name}</span>
                     </label>
                     <button className="btn btn-danger" style={{display:'none'}}>删除</button>
